@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clínica - Cadastro</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main-container">
+        <div class="doctor-wrapper walking" id="doctor-wrap">
+            <svg width="80" height="100" viewBox="0 0 80 100">
+    <line x1="30" y1="70" x2="30" y2="90" stroke="#2b2d42" stroke-width="6" stroke-linecap="round" class="leg left-leg"/>
+    <line x1="50" y1="70" x2="50" y2="90" stroke="#2b2d42" stroke-width="6" stroke-linecap="round" class="leg right-leg"/>
+    
+    <g class="torso-bounce">
+        
+        <g class="arm-left" style="transform-origin: 20px 40px;">
+            <line x1="20" y1="40" x2="20" y2="65" stroke="#ffffff" stroke-width="7" stroke-linecap="round"/>
+        </g>
+
+        <rect x="20" y="35" width="40" height="42" rx="8" fill="#ffffff" stroke="#dcdcdc" stroke-width="2"/>
+        <path d="M 30 35 L 50 35 L 40 48 Z" fill="#00b4d8"/>
+        <path d="M 28 35 C 28 52, 52 52, 52 35" fill="none" stroke="#2b2d42" stroke-width="2.5"/>
+        <line x1="50" y1="45" x2="50" y2="60" stroke="#2b2d42" stroke-width="2.5"/>
+        <circle cx="50" cy="62" r="3.5" fill="#edf2f4" stroke="#2b2d42" stroke-width="2"/>
+        <rect x="25" y="55" width="10" height="12" rx="2" fill="#ffffff" stroke="#dcdcdc" stroke-width="1.5"/>
+        <line x1="28" y1="52" x2="28" y2="58" stroke="#007BFF" stroke-width="2" stroke-linecap="round"/>
+        
+        <g class="head-bob" style="transform-origin: 40px 35px;">
+            <circle cx="40" cy="22" r="14" fill="#ffcdb2"/>
+            <path d="M 26 22 C 26 5, 54 5, 54 22 C 50 12, 30 12, 26 22 Z" fill="#2b2d42"/>
+            <circle cx="35" cy="20" r="2" fill="#2b2d42"/>
+            <circle cx="45" cy="20" r="2" fill="#2b2d42"/>
+            <circle cx="32" cy="24" r="2.5" fill="#ffb4a2" opacity="0.8"/>
+            <circle cx="48" cy="24" r="2.5" fill="#ffb4a2" opacity="0.8"/>
+            <path d="M 37 26 Q 40 29 43 26" stroke="#2b2d42" stroke-width="1.5" fill="transparent" stroke-linecap="round"/>
+        </g>
+
+        <g id="right-arm-group" style="transform-origin: 60px 40px;">
+            <line x1="60" y1="40" x2="60" y2="65" stroke="#ffffff" stroke-width="7" stroke-linecap="round" />
+            <line x1="59" y1="40" x2="59" y2="65" stroke="#dcdcdc" stroke-width="9" stroke-linecap="round" style="z-index:-1; opacity:0.5;" />
+        </g>
+
+    </g>
+</svg>
+        </div>
+
+        <div class="auth-box">
+            <h2>Novo Paciente</h2>
+            <p class="subtitle">Crie sua conta para agendar consultas.</p>
+            <form id="form-register">
+                <div class="input-group">
+                    <label>E-mail</label>
+                    <input type="email" placeholder="Escolha um e-mail" required>
+                </div>
+                <div class="input-group">
+                    <label>Celular</label>
+                    <input type="tel" placeholder="(00) 00000-0000" required>
+                </div>
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" placeholder="Crie uma senha" required>
+                </div>
+                <button type="submit" class="btn-secondary">Cadastrar-se</button>
+            </form>
+            <p class="switch-page">Já tem uma conta? <a href="login.html">Faça Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        const doctorWrap = document.getElementById('doctor-wrap');
+        let isPointing = false;
+
+        doctorWrap.addEventListener('click', () => {
+            if (isPointing) return;
+            isPointing = true;
+            doctorWrap.classList.remove('walking');
+            doctorWrap.classList.add('pointing');
+
+            setTimeout(() => {
+                doctorWrap.classList.remove('pointing');
+                doctorWrap.classList.add('walking');
+                isPointing = false;
+            }, 3500);
+        });
+    </script>
+</body>
+</html>

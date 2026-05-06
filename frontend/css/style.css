@@ -1,0 +1,236 @@
+/* Reset básico e tipografia */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Fundo degradê suave e terapêutico */
+    background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.main-container {
+    position: relative;
+    width: 100%;
+    max-width: 450px; /* Largura ideal para uma única coluna */
+    padding-top: 100px; /* Espaço para o doutor andar em cima */
+}
+
+/* ==================================
+   Estilos do Cartão (Glassmorphism)
+=================================== */
+.auth-box {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+h2 {
+    color: #2b2d42;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.subtitle {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Campos de Entrada */
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #495057;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #8ec5fc;
+    box-shadow: 0 0 0 4px rgba(142, 197, 252, 0.2);
+    background: #fff;
+}
+
+/* Botões */
+.btn-primary, .btn-secondary {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #007BFF, #0056b3);
+    color: #fff;
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #20c997, #12a378);
+    color: #fff;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Link para trocar de página */
+.switch-page {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #495057;
+}
+
+.switch-page a {
+    color: #007BFF;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.switch-page a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* ==================================
+   Animações do Mini Doutor (FLUIDAS)
+=================================== */
+.doctor-wrapper {
+    position: absolute;
+    top: -10px; /* Ajuste fino da altura para o balanço */
+    width: 80px;
+    height: 100px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Animação principal de translação (ir e vir) */
+.doctor-wrapper.walking {
+    animation: walkCycle 8s linear infinite;
+}
+
+/* Estado: Parado no meio e apontando */
+.doctor-wrapper.pointing {
+    left: 50% !important;
+    transform: translateX(-50%) scaleX(1) !important;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Transições suaves para os membros ao parar */
+#right-arm-group, .arm-left, .torso-bounce, .head-bob {
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==== O MÁGICO CLIQUE (APONTAR) ==== */
+/* Braço direito gira para apontar */
+.pointing #right-arm-group {
+    transform: rotate(85deg) scale(1.15) !important;
+}
+
+/* ==== ANIMAÇÕES ENQUANTO ANDA ==== */
+
+/* 1. Corpo subindo e descendo */
+.walking .torso-bounce {
+    animation: bounceBody 0.5s infinite alternate ease-in-out;
+}
+
+/* 2. Cabeça balançando levemente */
+.walking .head-bob {
+    animation: nodHead 1s infinite alternate ease-in-out;
+}
+
+/* 3. Braços balançando (Opostos às pernas) */
+.walking .arm-left {
+    animation: swingLeftArm 0.5s infinite alternate ease-in-out;
+}
+.walking #right-arm-group {
+    animation: swingRightArm 0.5s infinite alternate ease-in-out;
+}
+
+/* 4. Pernas */
+.walking .left-leg {
+    animation: marchLeft 0.5s infinite alternate ease-in-out;
+}
+.walking .right-leg {
+    animation: marchRight 0.5s infinite alternate ease-in-out;
+}
+
+/* ==== KEYFRAMES ==== */
+
+@keyframes walkCycle {
+    0%   { left: -5%;  transform: scaleX(1); }
+    48%  { left: calc(100% - 75px); transform: scaleX(1); }
+    50%  { left: calc(100% - 75px); transform: scaleX(-1); }
+    98%  { left: -5%;  transform: scaleX(-1); }
+    100% { left: -5%;  transform: scaleX(1); }
+}
+
+@keyframes bounceBody {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-4px); }
+}
+
+@keyframes nodHead {
+    0% { transform: rotate(-3deg); }
+    100% { transform: rotate(3deg); }
+}
+
+@keyframes swingRightArm {
+    0% { transform: rotate(-25deg); }
+    100% { transform: rotate(25deg); }
+}
+
+@keyframes swingLeftArm {
+    0% { transform: rotate(25deg); }
+    100% { transform: rotate(-25deg); }
+}
+
+@keyframes marchLeft {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+@keyframes marchRight {
+    0% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
