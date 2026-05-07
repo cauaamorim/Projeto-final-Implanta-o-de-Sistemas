@@ -93,8 +93,8 @@
         const email = document.getElementById('email').value;
         const senha = document.getElementById('senha').value;
 
-        try {
-            const resposta = await fetch('http://localhost:3100/api/login', {
+        try {   
+            const resposta = await fetch('https://projeto-agendamento-paciente.onrender.com/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

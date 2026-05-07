@@ -33,7 +33,7 @@
         async function carregarPacientes() {
             try {
          
-                const response = await fetch('http://localhost:3100/api/pacientes');
+                const response = await fetch('https://projeto-agendamento-paciente.onrender.com/api/pacientes');
                 const pacientes = await response.json();
                 
                 const tbody = document.getElementById('corpoTabela');
