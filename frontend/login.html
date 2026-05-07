@@ -54,11 +54,11 @@
             <form id="form-login">
                 <div class="input-group">
                     <label>E-mail</label>
-                    <input type="email" placeholder="Digite seu e-mail" required>
+                    <input id="email" type="email" placeholder="Digite seu e-mail" required>
                 </div>
                 <div class="input-group">
                     <label>Senha</label>
-                    <input type="password" placeholder="Digite sua senha" required>
+                    <input id="senha" type="password" placeholder="Digite sua senha" required>
                 </div>
                 <button type="submit" class="btn-primary">Entrar</button>
             </form>
@@ -82,6 +82,45 @@
                 isPointing = false;
             }, 3500);
         });
+
+//Logica de login
+
+    const form = document.getElementById('form-login');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+
+        try {
+            const resposta = await fetch('http://localhost:3100/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: email,
+                    senha: senha
+                })
+            });
+
+            const dados = await resposta.json();
+
+            if (resposta.ok) {
+                alert('Login realizado com sucesso!');
+
+                // redireciona
+                window.location.href = 'home.html';
+            } else {
+                alert(dados.erro);
+            }
+
+        } catch (erro) {
+            alert('Erro ao conectar com o servidor');
+            console.log(erro);
+        }
+    });
     </script>
 </body>
 </html>

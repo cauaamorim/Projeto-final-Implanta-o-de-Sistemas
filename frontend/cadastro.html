@@ -56,6 +56,10 @@
                     <label>E-mail</label>
                     <input type="email" placeholder="Escolha um e-mail" required>
                 </div>
+                 <div class="input-group">
+                    <label>Nome</label>
+                    <input type="text" id = "nome" placeholder="Digite seu nome" required>
+                </div>
                 <div class="input-group">
                     <label>Celular</label>
                     <input type="tel" placeholder="(00) 00000-0000" required>
@@ -86,6 +90,65 @@
                 isPointing = false;
             }, 3500);
         });
+
+        //logica de cadastro 
+         const form = document.getElementById('form-register');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Pegando valores dos inputs
+        const email = form.querySelector('input[type="email"]').value;
+        const nome = document.getElementById('nome').value;
+        const celular = form.querySelector('input[type="tel"]').value;
+        const senha = form.querySelector('input[type="password"]').value;
+
+        // Validação simples
+        if (!email || !nome || !celular || !senha) {
+            alert('Preencha todos os campos!');
+            return;
+        }
+
+        try {
+
+            const response = await fetch('http://localhost:3100/api/cadastro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email,
+                    nome,
+                    celular,
+                    senha
+                })
+            });
+
+            // Resposta do backend
+            const data = await response.json();
+
+            if (response.ok) {
+
+                alert(data.mensagem || 'Cadastro realizado com sucesso!');
+
+                // Redireciona para login
+                window.location.href = 'login.html';
+
+            } else {
+
+                alert(data.erro || 'Erro ao cadastrar');
+
+            }
+
+        } catch (error) {
+
+            console.error('Erro ao cadastrar:', error);
+
+            alert('Erro de conexão com o servidor');
+
+        }
+    });
+
     </script>
 </body>
 </html>
